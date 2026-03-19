@@ -5,44 +5,70 @@ let FPS = 50;
 //PAISATGE
 let ampleC = 50;
 let altC = 50;
-let cesped = '#009900';
-let terra = '#9E6003' ;
-let aigua = '#4795C1';
-let pedra =    '#606060';
+let cesped = '#06d606';
+let terra = '#b66e02';
+let aigua = '#148bcf';
+let pedra = '#8b8a8a';
+let clau = '#eeff00';
+let porta = '#682f00'
+let botasagua = '#b90db1'
+
+let retras = 0;
 let escenari = [
 
-[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,3],
-[3,1,1,1,1,1,1,0,0,0,0,1,1,0,0,0,0,0,1,1,1,0,0,3],
-[3,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,3],
-[3,0,0,0,3,2,2,3,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,3],
-[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+    [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 4, 0, 0, 0, 0, 0, 3, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 1, 1, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 6, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 3, 3, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 0, 0, 3, 0, 0, 3, 3, 0, 3, 0, 2, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 2, 2, 2, 2, 2, 2, 3, 4, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+
 
 ]
-function dibuixaEscenari(){
-    let color; 
-    for(let y=0; y<12; y++){
-        for(let x=0; x<32; x++){
-            if(escenari[y][x]==0){
-                color=cesped
+function dibuixaEscenari() {
+    let color;
+    for (let y = 0; y < 24; y++) {
+        for (let x = 0; x < 48; x++) {
+            if (escenari[y][x] == 0) {
+                color = cesped
             }
-            if(escenari[y][x]==1){
-                color=terra
+            if (escenari[y][x] == 1) {
+                color = terra
             }
-            if(escenari[y][x]==2){
-                color=aigua
+            if (escenari[y][x] == 2) {
+                color = aigua
             }
-            if(escenari[y][x]==3){
-                color=pedra
+            if (escenari[y][x] == 3) {
+                color = pedra
             }
+            if (escenari[y][x] == 4) {
+                color = clau
+            }
+            if (escenari[y][x] == 5) {
+                color = porta
+            }
+            if (escenari[y][x] == 6)
+                color = botasagua
             ctx.fillStyle = color;
-            ctx.fillRect(x*ampleC,y*altC,ampleC,altC)
+            ctx.fillRect(x * ampleC, y * altC, ampleC, altC)
         }
     }
 }
@@ -52,166 +78,189 @@ let imatge;
 let imatge2;
 //INICIALITZA EL JOC NOMES UNA VEGADA
 
-function inicializar(){
+function inicializar() {
     canvas = document.getElementById("pam talla");
     ctx = canvas.getContext('2d');
-  imatge =  new Image();
-  imatge2 = new Image();
+    imatge = new Image();
+    imatge2 = new Image();
     imatge.src = './ojo.png'
     imatge2.src = './Steve_Urkel.png'
     //INTERVAL QUE S'EXECUTA 50 VEGADAS PER SEGON
-    setInterval(function() {
+    setInterval(function () {
         principal();
-    }, 1000/FPS);
+    }, 1000 / FPS);
 }
 //MODIFICA SA PANTALLA
-    function borrarPantalla(){
-        canvas.width = 1600
-        canvas.height= 600
-    }
-let prota = function(x,y,vel){
+function borrarPantalla() {
+    canvas.width = 2400
+    canvas.height = 1200
+}
+let prota = function (x, y, vel) {
     this.x = x;
     this.y = y;
-    this.vel= vel;
+    this.clau = false;
+    this.botasagua = false;
 
-    this.dibuixa = function(){
-    ctx.drawImage(imatge,this.x,this.y,50,50)
+    this.dibuixa = function () {
+        ctx.drawImage(imatge, this.x, this.y, 50, 50)
     }
-    this.texte = function(){
+    this.texte = function () {
         ctx.font = '30px impact'
         ctx.fillStyle = '#555555'
-        ctx.fillText("X: "+this.x+" Y: "+this.y, 50,50)
+        ctx.fillText("X: " + this.x + " Y: " + this.y, 50, 50)
     }
-    this.adalt = function(){
-        this.y = this.y-this.vel
+    this.margenes = function (x, y) {
+        let colisio = false;
+        if (escenari[y / 50][x / 50] == 2 || escenari[y / 50][x / 50] == 3) {
+            colisio = true;
+
+            return colisio;
         }
-        this.baix = function(){
-            this.y = this.y+this.vel
+        return colisio;
+    }
+    this.logica = function () {
+        if (escenari[this.y / 50][this.x / 50] == 4) {
+            this.clau = true;
+            alert("Has encontrado la llave de mi corazon")
+            escenari[this.y / 50][this.x / 50] = 3
         }
-        this.dreta = function(){
-            this.x = this.x+this.vel
+        if (escenari[this.y / 50][this.x / 50] == 5) {
+            if (this.clau) {
+                alert("eres el puto amo, has salido vivo")
+            } else { alert("esta cerrado tontorron") }
         }
-        this.esquerra = function(){
-            this.x = this.x-this.vel
+
+    }
+    this.logica2 = function () {
+        if (escenari[this.y / 50][this.x / 50] == 6) {
+            this.botasagua = true;
+            alert("hs encotajfdro botsdas de gauia")
+            escenari[this.y / 50][this.x / 50] = 0
+
+
         }
-    
-}   
-let villano = function(x,y,vel){
+            if (escenari[this.y / 50][this.x / 50] == 2) {
+                if (this.botasagua) {
+                    alert("ya puedes caminar por el agua")
+                  
+                } else {
+                    alert("no puedes caminar por el agua")
+                    
+                }
+            }
+        
+    }
+
+
+this.adalt = function () {
+    if (!this.margenes(this.x, this.y - 50)) {
+        this.y = this.y - 50
+    }
+    this.logica()
+    this.logica2()
+}
+
+this.baix = function () {
+    if (!this.margenes(this.x, this.y + 50)) {
+        this.y = this.y + 50
+    }
+    this.logica()
+    this.logica2()
+}
+this.dreta = function () {
+    if (!this.margenes(this.x + 50, this.y)) {
+        this.x = this.x + 50
+    }
+    this.logica()
+    this.logica2()
+}
+this.esquerra = function () {
+    if (!this.margenes(this.x - 50, this.y)) {
+        this.x = this.x - 50
+    }
+    this.logica()
+    this.logica2()
+}
+}
+
+let enemics = function (x, y, vel) {
     this.x = x;
     this.y = y;
-    this.vel= vel;
+    this.vel = vel;
 
-    this.dibuixa = function(){
-    ctx.drawImage(imatge2,this.x,this.y,50,50)
+    this.dibuixa = function () {
+
+        ctx.fillRect(this.x, this.y, 50, 50)
+
     }
-    this.adalt1 = function(){
-        this.y = this.y-this.vel
-        }
-        this.baix1 = function(){
-            this.y = this.y+this.vel
-        }
-        this.dreta1 = function(){
-            this.x = this.x+this.vel
-        }
-        this.esquerra1 = function(){
-            this.x = this.x-this.vel
-        }
-    
-}   
+    this.margenes = function (x, y) {
+        let colisio = false;
+        if (escenari[y / 50][x / 50] == 2 || escenari[y / 50][x / 50] == 3) {
+            colisio = true;
 
-
-    
-    let personatge = function(x,y,vel){
-        this.x = x;
-        this.y = y;
-        this.vel = vel;
-        this.dreta = true;
-    
-        this.dibuixa = function(){
-           
-            ctx.fillRect(this.x,this.y,50,50)
+            return colisio;
         }
-        this.mou = function(){
-            console.log(this.x)
-    
-            if (this.dreta == true){
-            if(this.x < 1500){
-                this.x = this.x+this.vel
-            }else{
-            this.dreta = false;
+        return colisio;
+    }
+    this.mou = function () {
+        retras++;
+        if (retras == 50) {
+            retras=0
+            let posicio = Math.floor(Math.random() * 4)
+
+            if (posicio == 0) {
+                if (!this.margenes(this.x - 50, this.y))
+                    this.x = this.x - 50
             }
-        }else{
-          if(this.x > 100){
-                this.x = this.x-this.vel
-            }else{
-                this.dreta = true;
+            if (posicio == 1) {
+                if (!this.margenes(this.x + 50, this.y))
+                    this.x = this.x + 50
+            }
+            if (posicio == 2) {
+                if (!this.margenes(this.x, this.y - 50))
+                    this.y = this.y - 50
+            }
+            if (posicio == 3) {
+                if (!this.margenes(this.x, this.y + 50))
+                    this.y = this.y + 50
             }
         }
-    }
-
-    }
     
-
-    let ismail = new personatge (10,100,1);
-    let david = new personatge (10,300,5);
-    let pesas = new personatge (10,500,10);
-    let sophie = new prota (200,200,5);
-    let grau = new villano (300,300,5)
-    document.addEventListener('keydown',function(tecla){
-    if(tecla.key == 'w'){
-        grau.adalt1()
-        
     }
-
-    if(tecla.key == 's'){
-        grau.baix1()
-        
 }
 
-    if(tecla.key == 'd'){
-        grau.dreta1()
-        
-}
-    if(tecla.key == 'a'){
-        grau.esquerra1()
-        
-}
-})
-    document.addEventListener('keydown',function(tecla){
-    if(tecla.key == 'ArrowUp'){
+let sophie = new prota(200, 550);
+let porqueria = new enemics(200, 300, 10)
+
+document.addEventListener('keydown', function (tecla) {
+    if (tecla.key == 'ArrowUp') {
         sophie.adalt()
-        
+
     }
 
-    if(tecla.key == 'ArrowDown'){
+    if (tecla.key == 'ArrowDown') {
         sophie.baix()
-        
-}
 
-    if(tecla.key == 'ArrowRight'){
+    }
+
+    if (tecla.key == 'ArrowRight') {
         sophie.dreta()
-        
-}
-    if(tecla.key == 'ArrowLeft'){
+
+    }
+    if (tecla.key == 'ArrowLeft') {
         sophie.esquerra()
-        
-}
+
+    }
 })
 
-function principal(){
+function principal() {
     borrarPantalla();
     dibuixaEscenari()
-    ismail.dibuixa();
-    david.dibuixa();
-    pesas.dibuixa();
+
     sophie.dibuixa();
-    grau.dibuixa();
-    //PINTAR PERSONATJES
-    //MOU PERSONATJES
-    ismail.mou();
-    david.mou();
-    pesas.mou();
-    sophie.texte();
+    porqueria.dibuixa();
+    porqueria.mou();
+
 
 }
 
