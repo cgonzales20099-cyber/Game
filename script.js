@@ -26,7 +26,7 @@ let escenari = [
     [0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
     [0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
     [0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
-    [0, 2, 2, 2, 2, 2, 2, 0, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+    [0, 2, 2, 2, 2, 2, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
     [0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
     [0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
     [0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
@@ -49,7 +49,7 @@ function dibuixaEscenari() {
     for (let y = 0; y < 24; y++) {
         for (let x = 0; x < 48; x++) {
             let tile = escenari[y][x]
-            ctx.drawImage(tilemap,tile*32,0 ,32,32,x*ampleC,y*altC,ampleC,altC)
+            ctx.drawImage(tilemap2,tile*32,0 ,32,32,x*ampleC,y*altC,ampleC,altC)
         }
     }
 }
@@ -63,10 +63,10 @@ function inicializar() {
     ctx = canvas.getContext('2d');
     imatge = new Image();
     imatge2 = new Image();
-    tilemap = new Image();
-    imatge.src = './ojo.png'
-    imatge2.src = './Steve_Urkel.png'
-    tilemap.src = './tilemap.png'
+    tilemap2 = new Image();
+    imatge.src = './morda.png'
+    imatge2.src = './riri.png'
+    tilemap2.src = './tilemap2.png'
     //INTERVAL QUE S'EXECUTA 50 VEGADAS PER SEGON
     setInterval(function () {
         principal();
@@ -81,9 +81,14 @@ let prota = function (x, y, vel) {
     this.x = x;
     this.y = y;
     this.clau = false;
-    this.botasagua = false;
+    this.inventario = []
 
+   
 
+   
+   
+   
+    
     this.muerte = function(x,y){
 
     let died = false;
@@ -94,7 +99,7 @@ let prota = function (x, y, vel) {
     }
 
 
-    this.dibuixa = function () {
+    this.dibuixa = function() {
         ctx.drawImage(imatge, this.x, this.y, 50 , 50)
     }
     this.texte = function () {
@@ -104,7 +109,7 @@ let prota = function (x, y, vel) {
     }
     this.margenes = function (x, y) {
         let colisio = false;
-        if (escenari[y / 50][x / 50] == 0 || escenari[y / 50][x / 50] == 4) {
+        if (escenari[y / 50][x / 50] == 0 || escenari[y / 50][x / 50] == 1 ) {
             colisio = true;
 
             return colisio;
@@ -113,36 +118,24 @@ let prota = function (x, y, vel) {
     }
     this.logica = function () {
         if (escenari[this.y / 50][this.x / 50] == 3) {
-            this.clau = true;
-            alert("Has encontrado la llave de mi corazon")
+            
+            alert("Has encontrado una llave de oro")
             escenari[this.y / 50][this.x / 50] = 2
         }
         if (escenari[this.y / 50][this.x / 50] == 1) {
             if (this.clau) {
+              
                 alert("eres el puto amo, has salido vivo")
-            } else { alert("esta cerrado tontorron") }
-        }
-
-    }
-    this.logica2 = function () {
-        if (escenari[this.y / 50][this.x / 50] == 6) {
-            this.botasagua = true;
-            alert("hs encotajfdro botsdas de gauia")
-            escenari[this.y / 50][this.x / 50] = 0
-
-
-        }
-            if (escenari[this.y / 50][this.x / 50] == 0) {
-                if (this.botasagua) {
-                    alert("ya puedes caminar por el agua")
-                  
-                } else {
-                    alert("no puedes caminar por el agua")
-                    
-                }
-            }
+              
+            } else  {
+                
+                alert("esta cerrado tontorron") 
         
+            }
+        }
     }
+
+
 
 
 this.adalt = function () {
@@ -150,7 +143,7 @@ this.adalt = function () {
         this.y = this.y - 50
     }
     this.logica()
-    this.logica2()
+    
 }
 
 this.baix = function () {
@@ -158,21 +151,21 @@ this.baix = function () {
         this.y = this.y + 50
     }
     this.logica()
-    this.logica2()
+    
 }
 this.dreta = function () {
     if (!this.margenes(this.x + 50 , this.y)) {
         this.x = this.x + 50
     }
     this.logica()
-    this.logica2()
+    
 }
 this.esquerra = function () {
     if (!this.margenes(this.x - 50 , this.y)) {
         this.x = this.x - 50
     }
     this.logica()
-    this.logica2()
+    
 }
 }
 
@@ -183,12 +176,12 @@ let enemics = function (x, y, vel) {
 
     this.dibuixa = function () {
 
-        ctx.fillRect(this.x, this.y, 50 , 50)
+        ctx.drawImage(imatge2,this.x, this.y, 50 , 50)
 
     }
     this.margenes = function (x, y) {
         let colisio = false;
-        if (escenari[y / 50][x / 50] == 0 || escenari[y / 50][x / 50] == 4) {
+        if (escenari[y / 50][x / 50] == 0 || escenari[y / 50][x / 50] == 1) {
             colisio = true;
 
             return colisio;
@@ -230,6 +223,10 @@ let enemics = function (x, y, vel) {
 
 let sophie = new prota(200 , 550);
 let porqueria = new enemics(200 , 300 , 10)
+let gay = new enemics (200,400,10)
+let Omar = new enemics (200,500,10)
+
+
 
 document.addEventListener('keydown', function (tecla) {
     if (tecla.key == 'ArrowUp') {
@@ -259,6 +256,10 @@ function principal() {
     sophie.dibuixa();
     porqueria.dibuixa();
     porqueria.mou();
+    gay.dibuixa()
+    gay.mou()
+    Omar.dibuixa()
+    Omar.mou()
     
 
 }
