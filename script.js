@@ -81,7 +81,7 @@ let prota = function (x, y, vel) {
     this.x = x;
     this.y = y;
     this.clau = false;
-    this.inventario = []
+    
 
    
 
@@ -124,13 +124,13 @@ let prota = function (x, y, vel) {
         }
         if (escenari[this.y / 50][this.x / 50] == 1) {
             if (this.clau) {
-              
+            
                 alert("eres el puto amo, has salido vivo")
-              
+             
             } else  {
-                
+              
                 alert("esta cerrado tontorron") 
-        
+         
             }
         }
     }
